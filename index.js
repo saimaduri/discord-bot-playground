@@ -97,6 +97,13 @@ client.on('interactionCreate', async interaction => {
     if (!interaction.isButton()) return;
     if (!interaction.customId.startsWith('tictactoe')) return;
 
+    if (isGameOver()) {
+        interaction.update({
+            components: makeGrid()
+        })
+        return;
+    }
+
     parsedFields = interaction.customId.split('_');
     let row = parsedFields[1];
     let col = parsedFields[2];
